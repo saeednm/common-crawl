@@ -12,10 +12,10 @@ from save_results import save_df_to_parquet
 
 def main():
     """Entry point for the application script"""
-#    extract_and_save_external_links()
-#    read_and_insert_links_to_db(db_config_map)
+    extract_and_save_external_links()
+    read_and_insert_links_to_db(db_config_map)
     raw_table_df = read_table_into_df(db_config_map, 'external_links', "link")
-#    add_is_homepage_flag(raw_table_df)
+    add_is_homepage_flag(raw_table_df)
     aggregated = aggregate_by_domain(raw_table_df.sample(1000))
     aggregated_with_country = add_country_column("domain", aggregated)
     save_df_to_table(aggregated_with_country, db_config_map,"aggregated_with_country")
