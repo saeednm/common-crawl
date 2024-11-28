@@ -55,7 +55,10 @@ def read_and_insert_links_to_db():
                     print(entry.name, entry.path)
                     with open(entry.path, 'r') as file:
                         for line in file:
-                            links.append((line),)
+                            links.append((line.rstrip(),))
 
+    print(f"records to be added: {len(links)}" )
     # Insert links into the database
     insert_links_to_db(links, db_config)
+
+read_and_insert_links_to_db()
