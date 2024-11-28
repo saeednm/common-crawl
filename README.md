@@ -1,21 +1,22 @@
 # common-crawl
 
+the goal of this project is to ingest and analyze sample data from internet crawled public data prepared by common-crawl. 
 
-### prepare WARC files
+### download WARC files
 
 execute ```download.sh``` bash file to go to commoncrawl.org and download 3 segments of the most recent data to local
 
 ``` sh download.sh ```
 
-### initialize docker compose
+### initialize docker environment
 
-run this command :
+run the following command to start a postgres db instance and our dockerized python project
 
 ``` docker compose up ```
 
 #### steps 
 
-1. for each WARC file extract every external link you can find and save them in txt file line by line(```ingest_warc.py```)
+1. for each downloaded WARC file extract every external link you can find and save them in txt file line by line(```ingest_warc.py```)
 2. Load the data into a single column postgres table on docker (```insert_db.py```)
 3. read from table into pandas dataframe for next step aggregations(```read_table.py```)
 4. add a column to df as a flag that indicates if the link redirects to a home page or a subsection (```add_flag.py```)
