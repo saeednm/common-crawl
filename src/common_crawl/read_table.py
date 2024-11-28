@@ -1,13 +1,10 @@
 import psycopg2
-from urllib.parse import urlparse
-import psycopg2
 import pandas as pd
-from db_config import db_config
 
-def read_table_into_df(db_config, table_name, link_column):
+def read_table_into_df(db_config_map, table_name, link_column):
     try:
         # Connect to the database
-        conn = psycopg2.connect(**db_config)
+        conn = psycopg2.connect(**db_config_map)
         cur = conn.cursor()
 
         # Fetch all links from the database
@@ -23,9 +20,5 @@ def read_table_into_df(db_config, table_name, link_column):
             cur.close()
         if conn:
             conn.close()
-            
+    print(df)    
     return df
-
-
-df = read_table_into_df(db_config, 'external_links', "link")
-print(df)

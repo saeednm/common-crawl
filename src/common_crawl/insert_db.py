@@ -1,16 +1,14 @@
 import psycopg2
 import psycopg2.extras
 import io
-import string 
 import os
-from db_config import db_config
 
 txt_file_directory = "links_txt"
 table_name = "external_links"
 
-def insert_links_to_db(links, db_config):
+def insert_links_to_db(links, db_config_map):
     # Establish a database connection
-    conn = psycopg2.connect(**db_config)
+    conn = psycopg2.connect(**db_config_map)
     cursor = conn.cursor()
 
     # Create table if it doesn't exist
@@ -45,7 +43,7 @@ def insert_links_to_db(links, db_config):
     conn.close()
 
 
-def read_and_insert_links_to_db():
+def read_and_insert_links_to_db(db_config_map):
     links = []
 
     with os.scandir(txt_file_directory) as iter:
@@ -58,6 +56,4 @@ def read_and_insert_links_to_db():
 
     print(f"records to be added: {len(links)}" )
     # Insert links into the database
-    insert_links_to_db(links, db_config)
-
-read_and_insert_links_to_db()
+    insert_links_to_db(links, db_config_map)

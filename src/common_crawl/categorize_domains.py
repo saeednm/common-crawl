@@ -1,8 +1,6 @@
 import pandas as pd
 import requests
 import time
-import aggregare_by_doamin
-import save_aggregate_table
 
 
 # API configuration
@@ -10,15 +8,6 @@ API_URL = "https://website-categorization.whoisxmlapi.com/api/v2"
 API_KEY = "your_api_key_here"  # Replace with your API key
 
 def categorize_website(domain):
-    """
-    Queries the API to categorize a website based on its domain.
-
-    Args:
-        domain (str): The domain to categorize.
-
-    Returns:
-        str: The category of the website, or 'Unknown' if unavailable.
-    """
     try:
         response = requests.get(API_URL, params={"apiKey": API_KEY, "domainName": domain})
         response.raise_for_status()
@@ -43,6 +32,3 @@ def add_category_to_df(df: pd.DataFrame):
     # Display the result
     print(df)
     return df
-
-categorized_domains =  add_category_to_df(aggregare_by_doamin.aggregated)
-save_aggregate_table.save_df_to_table(categorized_domains)

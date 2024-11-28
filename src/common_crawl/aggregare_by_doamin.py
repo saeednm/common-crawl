@@ -1,11 +1,5 @@
 from urllib.parse import urlparse
 import pandas as pd
-import read_table
-
-import pandas as pd
-from urllib.parse import urlparse
-
-
 
 # Step 1: Parse domain and path
 def extract_domain_and_path(url):
@@ -25,5 +19,6 @@ def aggregate_by_domain(df: pd.DataFrame):
 
     # Display the result
     print(aggregated)
+    return aggregated
 
-aggregated = aggregate_by_domain(read_table.df)
+

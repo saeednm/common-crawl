@@ -52,11 +52,6 @@ def save_links_to_file(links, filename):
                     file.write(f"{link}\n")  # Write one link per line
 
 
-# Example usage
-#warc_file = "commoncrawl_segments/CC-MAIN-20241101184224-20241101214224-00000.warc.gz"
-#links = extract_external_links(warc_file)
-#save_links_to_file(links, "links.txt")
-
 def extract_and_save_external_links():
     with os.scandir(warc_file_directory) as iter:
         for entry in iter:
@@ -67,4 +62,3 @@ def extract_and_save_external_links():
 
     print("done!")
 
-extract_and_save_external_links()

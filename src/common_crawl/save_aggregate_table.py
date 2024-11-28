@@ -1,10 +1,9 @@
 import pandas as pd
 import psycopg2
 from psycopg2.extras import execute_values
-from db_config import db_config
 
 
-def save_df_to_table(df: pd.DataFrame):
+def save_df_to_table(df: pd.DataFrame, db_config_map):
 
     # Convert 'paths' column to JSON-compatible strings
     df["paths"] = df["paths"].apply(lambda x: list(x))  # Convert set to list
@@ -16,7 +15,7 @@ def save_df_to_table(df: pd.DataFrame):
     # Create a connection and insert data
     try:
         # Connect to the database
-        conn = psycopg2.connect(**db_config)
+        conn = psycopg2.connect(**db_config_map)
         cur = conn.cursor()
 
         # Create table if it doesn't exist

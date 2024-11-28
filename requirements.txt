@@ -5,3 +5,4 @@ bs4
 validators
 psycopg2-binary
 pandas
+pyarrow

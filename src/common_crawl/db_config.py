@@ -1,5 +1,5 @@
 # Database configuration
-db_config = {
+db_config_map = {
     "dbname": "postgres",
     "user": "postgres",
     "password": "example",
