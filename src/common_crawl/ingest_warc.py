@@ -52,13 +52,24 @@ def save_links_to_file(links, filename):
                     file.write(f"{link}\n")  # Write one link per line
 
 
+def __extract_and_save_external_links(entry):
+    print(entry.name, entry.path)
+    links = extract_external_links(entry.path)
+    save_links_to_file(links, entry.name + ".txt")
+
+from multiprocessing.pool import ThreadPool as Pool
+pool_size = 3
+
 def extract_and_save_external_links():
+    pool = Pool(pool_size)
+
     with os.scandir(warc_file_directory) as iter:
         for entry in iter:
             if entry.name.endswith(".warc.gz") and entry.is_file():
-                print(entry.name, entry.path)
-                links = extract_external_links( entry.path)
-                save_links_to_file(links, entry.name + ".txt")
+                pool.apply_async(__extract_and_save_external_links, (entry,))
+    pool.close()
+    pool.join()
 
-    print("done!")
+    print("extract and save external links done!")
+
 
