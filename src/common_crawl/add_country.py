@@ -1,6 +1,5 @@
 from urllib.parse import urlparse
 import pandas as pd
-import aggregare_by_doamin
 
 # Map of TLDs to countries
 TLD_TO_COUNTRY = {
@@ -32,10 +31,10 @@ def infer_country_from_url(url):
     except Exception as e:
         return "Unknown"
 
-def update_country_column(df: pd.DataFrame):
+def add_country_column(df: pd.DataFrame):
 
     df["country"] = df.apply(lambda x: infer_country_from_url(x['link']), axis=1)
     print(df)
 
 
-update_country_column(aggregare_by_doamin.aggregated)
+
