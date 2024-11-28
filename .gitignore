@@ -171,3 +171,4 @@ src/.DS_Store
 src/common_crawl/.DS_Store
 .DS_Store
 docker-compose.debug.yml
+output_partitioned/
