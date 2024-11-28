@@ -1,6 +1,6 @@
 from urllib.parse import urlparse
 import pandas as pd
-import add_flag
+import read_table
 
 # Map of TLDs to countries
 TLD_TO_COUNTRY = {
@@ -38,4 +38,4 @@ def update_country_column(df: pd.DataFrame):
     print(df)
 
 
-update_country_column(add_flag.df)
+update_country_column(read_table.df)
