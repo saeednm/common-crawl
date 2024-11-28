@@ -26,15 +26,15 @@ def infer_country_from_url(url):
         str: The inferred country or 'Unknown'.
     """
     try:
-        domain = urlparse(url).netloc.split('.')[-1]  # Extract TLD
+        domain = url.split('.')[-1]  # Extract TLD
         return TLD_TO_COUNTRY.get(domain, "Unknown")
     except Exception as e:
         return "Unknown"
 
-def add_country_column(df: pd.DataFrame):
+def add_country_column(reference , df: pd.DataFrame):
 
-    df["country"] = df.apply(lambda x: infer_country_from_url(x['link']), axis=1)
-    print(df)
+    df["country"] = df.apply(lambda x: infer_country_from_url(x[reference]), axis=1)
+    return df
 
 
 

@@ -9,12 +9,12 @@ def extract_domain_and_path(url):
 def aggregate_by_domain(df: pd.DataFrame):
 
     # Apply parsing function to extract domain and path
-    df[["domain", "path"]] = df["link"].apply(lambda url: pd.Series(extract_domain_and_path(url)))
+    df[["domain", "paths"]] = df["link"].apply(lambda url: pd.Series(extract_domain_and_path(url)))
 
     # Step 2: Aggregate paths into a set for each domain
     aggregated = df.groupby("domain").agg(
         domain_frequency=("domain", "size"),  # Count the number of occurrences for each domain
-        paths=("path", lambda x: set(x))     # Aggregate paths into a set
+        paths=("paths", lambda x: set(x))     # Aggregate paths into a set
     ).reset_index()
 
     # Display the result

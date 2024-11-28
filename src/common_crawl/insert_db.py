@@ -30,13 +30,6 @@ def insert_links_to_db(links, db_config_map):
     # Perform the bulk insert with copy_from
     cursor.copy_from(buffer, 'external_links', columns=('link',))
 
-    
-
-    # insert_query = 'INSERT INTO external_links (link) VALUES (%s)'
-    # psycopg2.extras.execute_values (cursor, insert_query, links, template=None, page_size=10)
-
-
-
     # Commit the transaction and close the connection
     conn.commit()
     cursor.close()
