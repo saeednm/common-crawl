@@ -3,6 +3,6 @@ db_config_map = {
     "dbname": "postgres",
     "user": "postgres",
     "password": "example",
-    "host": "localhost",
+    "host": "db",
     "port": 5432
 }
