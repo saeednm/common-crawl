@@ -2,6 +2,7 @@ import psycopg2
 from urllib.parse import urlparse
 import psycopg2
 import pandas as pd
+from db_config import db_config
 
 def read_table_into_df(db_config, table_name, link_column):
     try:
@@ -24,18 +25,6 @@ def read_table_into_df(db_config, table_name, link_column):
             conn.close()
             
     return df
-
-
-
-# Database configuration
-db_config = {
-    "dbname": "postgres",
-    "user": "postgres",
-    "password": "example",
-    "host": "localhost",
-    "port": 5432
-}
-
 
 
 df = read_table_into_df(db_config, 'external_links', "link")

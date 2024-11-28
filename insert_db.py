@@ -3,14 +3,24 @@ import psycopg2.extras
 import io
 import string 
 import os
+from db_config import db_config
 
 txt_file_directory = "links_txt"
+table_name = "external_links"
 
 def insert_links_to_db(links, db_config):
     # Establish a database connection
     conn = psycopg2.connect(**db_config)
     cursor = conn.cursor()
 
+    # Create table if it doesn't exist
+    create_table_query = f"""
+        CREATE TABLE IF NOT EXISTS {table_name} (
+             link TEXT
+        );
+        """
+    cursor.execute(create_table_query)
+    
     # Convert data to a CSV-like string (without headers)
     buffer = io.StringIO()
     for row in links:
@@ -33,17 +43,6 @@ def insert_links_to_db(links, db_config):
     conn.commit()
     cursor.close()
     conn.close()
-
-# Database configuration
-db_config = {
-    "dbname": "postgres",
-    "user": "postgres",
-    "password": "example",
-    "host": "localhost",
-    "port": 5432
-}
-
-
 
 
 def read_and_insert_links_to_db():
